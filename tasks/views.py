@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Task
@@ -7,7 +7,7 @@ from .permisions import IsOwner
 from .filters import TaskFilter
 
 class TaskViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsOwner]
+    permission_classes = [IsOwner, permissions.IsAuthenticated]
     filterset_class = TaskFilter
     
     def get_serializer_class(self):
